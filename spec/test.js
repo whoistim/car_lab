@@ -79,26 +79,49 @@ describe('Car', function(){
     });
   });
 
-  describe('#park', function(){
-    it('should make sure to only work when the car is off', function(){
-
+  describe('#driveTo', function(){
+    it('should work when the car is on, dude', function(){
+      myCar.start();
+      myCar.driveTo("France");
     });
+    it('should make sure to only work when the car is off', function(){
+      myCar.off();
+      myCar.driveTo("Nowhere");
+    });  
 
+  });
+
+  describe('#park', function(){
+    it('should not work when the car is on', function(){
+      myCar.start();
+      myCar.park();
+    });
+    it('should work when the car is off', function(){
+      myCar.off();
+      myCar.park();
+    });
   });
 
   describe('#pickUp', function(){
     it('should add the passenger to the passengers array if car is on', function(){
-
+      myCar.start();
+      myCar.pickUp("Joey");
+      expect(myCar.passengers).to.contain("Joey");
     });
 
     it('should not modify the passengers array if car is off', function(){
-
+      myCar.off();
+      myCar.pickUp("Joey");
+      expect(myCar.passengers).to.not.contain("Joey");
     });
   });
 
   describe('#dropOff', function(){
     it('should remove passenger from the passengers array if car is on', function(){
-
+      myCar.start();
+      myCar.pickUp("Joey");
+      myCar.dropOff("Joey");
+      expect(myCar.passengers).to.not.contain("Joey");
     });
 
     it('should leave passenger in the passengers array if car is off', function(){

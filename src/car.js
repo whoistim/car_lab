@@ -26,4 +26,29 @@ Car.prototype.off = function() {
 	this.state = "off";
 };
 
+Car.prototype.driveTo = function(destination) {
+	if (this.state == "on") {
+	console.log("Driving to " + destination);
+	}
+};
+
+Car.prototype.park = function(destination) {
+	if (this.state == "off") {
+	console.log("Parked! Phew!");
+	}
+};
+
+Car.prototype.pickUp = function(buddy) {
+	if (this.state == "on") {
+	this.passengers.push(buddy);	
+	console.log("Driving to pick up " + buddy + "!");
+	}
+};
+
+Car.prototype.dropOff = function(buddy) {
+	if (this.state == "on") {
+	var outGuy = this.passengers.indexOf(buddy);
+	this.passengers.splice(outGuy,1);	
+	}
+};
 module.exports=Car;
